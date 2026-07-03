@@ -220,6 +220,60 @@ function initParticles() {
     }
 }
 
+/* ============================================
+   SELFIE (CAPTURA DE PANTALLA)
+   ============================================ */
+
+   async function takeSelfie() {
+
+    try {
+
+        // Espera unos milisegundos para que termine cualquier animación
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const canvas = await html2canvas(document.body, {
+
+            scale: 2,
+
+            useCORS: true,
+
+            allowTaint: true,
+
+            backgroundColor: null,
+
+            scrollX: 0,
+
+            scrollY: -window.scrollY,
+
+            width: document.documentElement.scrollWidth,
+
+            height: document.documentElement.scrollHeight,
+
+            windowWidth: document.documentElement.scrollWidth,
+
+            windowHeight: document.documentElement.scrollHeight
+
+        });
+
+        // Crear enlace de descarga
+        const enlace = document.createElement("a");
+
+        enlace.download = "CyberPet_Selfie.png";
+
+        enlace.href = canvas.toDataURL("image/png");
+
+        enlace.click();
+
+    }
+
+    catch (error) {
+
+        console.error("Error al capturar la pantalla:", error);
+
+    }
+
+}
+
 // ============================================
 // MODO NOCTURNO
 // ============================================
